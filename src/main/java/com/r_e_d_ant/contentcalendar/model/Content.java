@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public record Content(
         Integer id,
+//        @NotBlank
         String title,
         String desc,
         Status status,

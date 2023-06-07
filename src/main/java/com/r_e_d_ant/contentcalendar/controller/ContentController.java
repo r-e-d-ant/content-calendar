@@ -36,7 +36,7 @@ public class ContentController {
     // Create
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    public void create(@RequestBody Content content) { // @RequestBody indicate that it should be bound to the body of the web request.
+    public void create(/*@Valid ,content need to be valid*/ @RequestBody Content content) { // @RequestBody indicate that it should be bound to the body of the web request.
         repository.save(content);
     }
 
