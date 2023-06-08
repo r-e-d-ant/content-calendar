@@ -1,7 +1,8 @@
 package com.r_e_d_ant.contentcalendar.controller;
 
 import com.r_e_d_ant.contentcalendar.model.Content;
-import com.r_e_d_ant.contentcalendar.repository.ContentCollectionRepository;
+import com.r_e_d_ant.contentcalendar.model.Status;
+import com.r_e_d_ant.contentcalendar.repository.ContentRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,9 +14,9 @@ import java.util.Optional;
 @RequestMapping("/api/content")
 @CrossOrigin
 public class ContentController {
-    private final ContentCollectionRepository repository;
+    private final ContentRepository repository;
 
-    public ContentController(ContentCollectionRepository repository) {
+    public ContentController(ContentRepository repository) {
         this.repository = repository;
     }
 
@@ -54,5 +55,18 @@ public class ContentController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
         repository.deleteById(id);
+    }
+
+    // -- Filter
+    // by Title
+    @GetMapping("/filter/{keyword}")
+    public List<Content> findByTitle(@PathVariable String keyword) {
+        return repository.findAllByTitleContains(keyword);
+    }
+
+    // by Status
+    @GetMapping("/filter/status/{status}")
+    public List<Content> findByStatus(@PathVariable Status status) {
+        return repository.listByStatus(status);
     }
 }

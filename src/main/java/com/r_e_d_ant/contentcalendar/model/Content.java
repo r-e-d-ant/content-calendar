@@ -1,8 +1,9 @@
 package com.r_e_d_ant.contentcalendar.model;
-
 import java.time.LocalDateTime;
 
+//@Table(value="tbl_content")
 public record Content(
+//        @Id
         Integer id,
 //        @NotBlank
         String title,
